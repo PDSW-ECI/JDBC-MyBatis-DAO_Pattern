@@ -32,8 +32,9 @@ public class ConsoleView {
         
         df.beginSession();
         
-        df.getDaoProducto().save(new Producto(99,"xx",9999));
-        //System.out.println(prod);
+        //operaciones con DAO
+        
+        
         df.commitTransaction();
         
         df.endSession();

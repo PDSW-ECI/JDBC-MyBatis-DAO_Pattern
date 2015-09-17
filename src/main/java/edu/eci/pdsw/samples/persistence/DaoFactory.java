@@ -26,17 +26,38 @@ public abstract class DaoFactory {
     
     protected DaoFactory(){}
     
-    
     private static final ThreadLocal<DaoFactory> perThreadInstance = new ThreadLocal<DaoFactory>() {
         @Override
         protected DaoFactory initialValue() {    
             return new JDBCDaoFactory();
         }
     };
-        
+    
     public static DaoFactory getInstance(){          
         return perThreadInstance.get();
     }
+
+
+    /*
+        //EL ESQUEMA ANTERIOR ES UNA ALTERNATIVA AL MECANISMO DE FÁBRICA
+        //ABSTRACTA VISTO ANTERIORMENTE:
+        
+        private static final DaoFactory instance=null;
+    
+        public static DaoFactory getInstance(){          
+            if (instance=null){
+                instance= ...
+            }
+            return instance;
+        }
+        
+        //EN PRINCIPIO FUNCIONAN IGUAL, PERO EL NUEVO MECANISMO
+        //GARANTIZA CONSISTENCIA CUANDO LA FÁBRICA SEA UTILIZADA
+        //CONCURRENTEMENTE.
+    */
+    
+    
+    
     
     public abstract void beginSession() throws PersistenceException;
     
