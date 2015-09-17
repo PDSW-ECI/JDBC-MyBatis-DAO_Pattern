@@ -27,7 +27,7 @@ public abstract class DaoFactory {
     protected DaoFactory(){}
     
     
-    private static ThreadLocal<DaoFactory> perThreadInstance = new ThreadLocal<DaoFactory>() {
+    private static final ThreadLocal<DaoFactory> perThreadInstance = new ThreadLocal<DaoFactory>() {
         @Override
         protected DaoFactory initialValue() {    
             return new JDBCDaoFactory();
