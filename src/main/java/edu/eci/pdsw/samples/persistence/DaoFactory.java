@@ -26,13 +26,16 @@ public abstract class DaoFactory {
     
     protected DaoFactory(){}
     
-    private static DaoFactory instance=null;
+    
+    private static ThreadLocal<DaoFactory> perThreadInstance = new ThreadLocal<DaoFactory>() {
+        @Override
+        protected DaoFactory initialValue() {    
+            return new JDBCDaoFactory();
+        }
+    };
         
-    public static DaoFactory getInstance(){
-        if (instance==null){
-            instance=new JDBCDaoFactory();
-        }        
-        return instance;
+    public static DaoFactory getInstance(){          
+        return perThreadInstance.get();
     }
     
     public abstract void beginSession() throws PersistenceException;

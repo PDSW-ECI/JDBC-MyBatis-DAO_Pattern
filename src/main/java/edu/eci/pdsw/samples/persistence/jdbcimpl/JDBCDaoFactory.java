@@ -45,9 +45,7 @@ public class JDBCDaoFactory extends DaoFactory {
             Connection _con=DriverManager.getConnection(url,user,pwd);
             _con.setAutoCommit(false);
             return _con;
-        } catch (ClassNotFoundException ex) {
-            throw new PersistenceException("Error on connection opening.",ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new PersistenceException("Error on connection opening.",ex);
         }
 

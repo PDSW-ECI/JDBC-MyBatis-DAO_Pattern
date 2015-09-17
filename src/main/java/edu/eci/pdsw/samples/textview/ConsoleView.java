@@ -27,6 +27,7 @@ import edu.eci.pdsw.samples.persistence.PersistenceException;
 public class ConsoleView {
     
     public static void main(String args[]) throws PersistenceException{
+        
         DaoFactory df=DaoFactory.getInstance();
         
         df.beginSession();
@@ -35,7 +36,6 @@ public class ConsoleView {
         System.out.println(prod);
         
         df.endSession();
-        
         
         
     }
