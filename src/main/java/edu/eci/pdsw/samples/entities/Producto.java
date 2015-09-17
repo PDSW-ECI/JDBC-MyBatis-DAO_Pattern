@@ -38,6 +38,8 @@ public class Producto {
         return codigo;
     }
 
+
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -58,6 +60,9 @@ public class Producto {
         this.precio = precio;
     }
     
-    
+    @Override
+    public String toString() {
+        return "["+codigo+","+nombre+","+precio+"]";
+    }
     
 }

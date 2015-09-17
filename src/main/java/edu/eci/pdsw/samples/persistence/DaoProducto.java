@@ -16,10 +16,17 @@
  */
 package edu.eci.pdsw.samples.persistence;
 
+import edu.eci.pdsw.samples.entities.Producto;
+
 /**
  *
  * @author hcadavid
  */
 public interface DaoProducto {
+
+    
+    public Producto getProducto(int idProducto) throws PersistenceException;
+    
+    
     
 }

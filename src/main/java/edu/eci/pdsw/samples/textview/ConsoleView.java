@@ -14,32 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.eci.pdsw.samples.persistence;
+package edu.eci.pdsw.samples.textview;
 
-import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoFactory;
+import edu.eci.pdsw.samples.entities.Producto;
+import edu.eci.pdsw.samples.persistence.DaoFactory;
+import edu.eci.pdsw.samples.persistence.PersistenceException;
 
 /**
  *
  * @author hcadavid
  */
-public abstract class DaoFactory {
+public class ConsoleView {
     
-    protected DaoFactory(){}
-    
-    private static DaoFactory instance=null;
+    public static void main(String args[]) throws PersistenceException{
+        DaoFactory df=DaoFactory.getInstance();
         
-    public static DaoFactory getInstance(){
-        if (instance==null){
-            instance=new JDBCDaoFactory();
-        }        
-        return instance;
+        df.beginSession();
+        
+        Producto prod=df.getDaoProducto().getProducto(1);
+        System.out.println(prod);
+        
+        df.endSession();
+        
+        
+        
     }
     
-    public abstract void beginSession() throws PersistenceException;
-    
-    public abstract DaoProducto getDaoProducto();
-    
-    public abstract DaoPedido getDaoPedido();
-    
-    public abstract void endSession() throws PersistenceException;
 }
