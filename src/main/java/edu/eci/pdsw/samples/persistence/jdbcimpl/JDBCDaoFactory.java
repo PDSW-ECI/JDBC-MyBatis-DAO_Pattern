@@ -34,6 +34,7 @@ public class JDBCDaoFactory extends DaoFactory {
 
     Connection con;
     
+    
     private Connection openConnection() throws PersistenceException{
             String url="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba";
             String driver="com.mysql.jdbc.Driver";
@@ -84,6 +85,34 @@ public class JDBCDaoFactory extends DaoFactory {
             }
             else{
                 con.close();
+            }            
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error on connection closing.",ex);
+        }
+    }
+
+    @Override
+    public void commitTransaction() throws PersistenceException {
+        try {
+            if (con==null || con.isClosed()){
+                throw new PersistenceException("Conection is null or is already closed.");
+            }
+            else{
+                con.commit();
+            }            
+        } catch (SQLException ex) {
+            throw new PersistenceException("Error on connection closing.",ex);
+        }        
+    }
+
+    @Override
+    public void rollbackTransaction() throws PersistenceException {
+                try {
+            if (con==null || con.isClosed()){
+                throw new PersistenceException("Conection is null or is already closed.");
+            }
+            else{
+                con.rollback();
             }            
         } catch (SQLException ex) {
             throw new PersistenceException("Error on connection closing.",ex);

@@ -39,7 +39,7 @@ public class JDBCDaoProducto implements DaoProducto {
     }
     
     @Override
-    public Producto getProducto(int idProducto) throws PersistenceException {
+    public Producto load(int idProducto) throws PersistenceException {
         PreparedStatement ps;
         try {
             ps = con.prepareStatement("select nombre, precio from ORD_PRODUCTOS where codigo=?");
@@ -57,6 +57,22 @@ public class JDBCDaoProducto implements DaoProducto {
             throw new PersistenceException("An error ocurred while loading a product.",ex);
         }
         
+    }
+
+    @Override
+    public void save(Producto p) throws PersistenceException {
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement("insert into ORD_PRODUCTOS(codigo,nombre,precio) values(?,?,?)");
+            ps.setInt(1, p.getCodigo());
+            ps.setString(2, p.getNombre());
+            ps.setInt(3, p.getPrecio());
+            
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            throw new PersistenceException("An error ocurred while loading a product.",ex);
+        }
     }
     
 }

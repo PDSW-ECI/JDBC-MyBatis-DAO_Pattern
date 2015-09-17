@@ -25,8 +25,9 @@ import edu.eci.pdsw.samples.entities.Producto;
 public interface DaoProducto {
 
     
-    public Producto getProducto(int idProducto) throws PersistenceException;
+    public Producto load(int idProducto) throws PersistenceException;
     
+    public void save(Producto p) throws PersistenceException;
     
     
 }
