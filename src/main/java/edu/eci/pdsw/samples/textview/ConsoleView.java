@@ -35,6 +35,7 @@ public class ConsoleView {
         //operaciones con DAO
         
         
+        
         df.commitTransaction();
         
         df.endSession();
