@@ -23,51 +23,28 @@ import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoFactory;
  * @author hcadavid
  */
 public abstract class DaoFactory {
-    
-    protected DaoFactory(){}
-    
-    private static final ThreadLocal<DaoFactory> perThreadInstance = new ThreadLocal<DaoFactory>() {
-        @Override
-        protected DaoFactory initialValue() {    
-            return new JDBCDaoFactory();
-        }
-    };
-    
-    public static DaoFactory getInstance(){          
-        return perThreadInstance.get();
+
+    protected DaoFactory() {
     }
 
+    private static DaoFactory instance = null;
 
-    /*
-        //EL ESQUEMA ANTERIOR ES UNA ALTERNATIVA AL MECANISMO DE FÁBRICA
-        //ABSTRACTA VISTO ANTERIORMENTE:
-        
-        private static final DaoFactory instance=null;
-    
-        public static DaoFactory getInstance(){          
-            if (instance=null){
-                instance= ...
-            }
-            return instance;
+    public static DaoFactory getInstance() {
+        if (instance == null) {
+            instance = new JDBCDaoFactory();        
         }
-        
-        //EN PRINCIPIO FUNCIONAN IGUAL, PERO EL NUEVO MECANISMO
-        //GARANTIZA CONSISTENCIA CUANDO LA FÁBRICA SEA UTILIZADA
-        //CONCURRENTEMENTE.
-    */
-    
-    
-    
-    
+        return instance;
+    }
+
     public abstract void beginSession() throws PersistenceException;
-    
+
     public abstract DaoProducto getDaoProducto();
-    
+
     public abstract DaoPedido getDaoPedido();
-    
+
     public abstract void commitTransaction() throws PersistenceException;
-    
+
     public abstract void rollbackTransaction() throws PersistenceException;
-    
+
     public abstract void endSession() throws PersistenceException;
 }
