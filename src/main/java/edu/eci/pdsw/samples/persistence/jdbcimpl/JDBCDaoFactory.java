@@ -61,7 +61,7 @@ public class JDBCDaoFactory extends DaoFactory {
                 throw new PersistenceException("Session was already opened.");
             }
         } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while opening a JDBC connection.",ex);
+            throw new PersistenceException("An error occurred while opening a JDBC connection.",ex);
         }
         
     }
