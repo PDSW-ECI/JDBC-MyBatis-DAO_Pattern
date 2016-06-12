@@ -54,7 +54,7 @@ public class JDBCDaoProducto implements DaoProducto {
             }
             
         } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while loading a product.",ex);
+            throw new PersistenceException("An error occurred while loading a product.",ex);
         }
         
     }
@@ -71,7 +71,7 @@ public class JDBCDaoProducto implements DaoProducto {
             ps.execute();
             
         } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while loading a product.",ex);
+            throw new PersistenceException("An error occurred while loading a product.",ex);
         }
     }
     
